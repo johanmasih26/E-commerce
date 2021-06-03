@@ -14,12 +14,18 @@ from django.db.models import Q
 
 class ProductView(View):    
     def get(self,request):
-        topwears = Product.objects.filter(category='TW')
-        Bottomwears = Product.objects.filter(category='BW')
-        Mobile = Product.objects.filter(category='M')
-        # total_product = Cart.objects.filter(user=request.user).count()
+        if request.user.is_authenticated:
+            topwears = Product.objects.filter(category='TW')
+            Bottomwears = Product.objects.filter(category='BW')
+            Mobile = Product.objects.filter(category='M')
+            total_product = Cart.objects.filter(user=request.user).count()
+
+        else:
+            topwears = Product.objects.filter(category='TW')
+            Bottomwears = Product.objects.filter(category='BW')
+            Mobile = Product.objects.filter(category='M')
         
-        return render(request,'app/home.html',{'topwears':topwears,'Bottomwears':Bottomwears,'Mobile':Mobile})
+        return render(request,'app/home.html',{'topwears':topwears,'Bottomwears':Bottomwears,'Mobile':Mobile,'total_product':total_product})
         
 
 
@@ -49,7 +55,7 @@ def showCart(request):
     total_product = Cart.objects.filter(user=request.user).count()
     print(total_product)
     if request.user.is_authenticated:
-        cart = Cart.objects.filter(userid=request.user.id)
+        cart = Cart.objects.filter(user=request.user)
         if cart:
             for p in cart:
                tempamount = (p.quantity * p.product.discounted_price)
@@ -60,6 +66,24 @@ def showCart(request):
             messages.warning(request,'You have no Product in Your Cart !!')
 
     return render(request,'app/addtocart.html',{'cart':cart,'totalamount':totalamount,'amount':amount})
+
+
+def checkout(request):
+
+    address = Customer.objects.filter(user=request.user)
+    products = Cart.objects.filter(user=request.user)
+    tempamount = 0.0
+    totalamount = 0.0
+    if products:
+        for i in products:
+            tempamount=(i.quantity * i.product.discounted_price)
+            totalamount += tempamount
+
+
+    totalamount += 70 
+
+
+    return render(request, 'app/checkout.html',{'address':address,'products':products,'totalamount':totalamount})
 
 
 def buy_now(request):
@@ -206,9 +230,6 @@ class RegisterationView(View):
         return render(request,'app/customerregistration.html',{'form':form})    
 
 
-
-def checkout(request):
- return render(request, 'app/checkout.html')
 
 
 def test(request):
