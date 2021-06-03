@@ -3,7 +3,7 @@ from django.db.models import query
 from django.db.models.query import QuerySet
 from django.http import request
 from django.http.response import HttpResponse,JsonResponse
-from app.models import Cart, Customer, Product
+from app.models import Cart, Customer, OrderPlaced, Product
 from django.shortcuts import redirect, render
 from django.views import View
 from .forms import CustomerProfileForm, RegistrationForm,LoginForm
@@ -70,7 +70,7 @@ def showCart(request):
 
 def checkout(request):
 
-    address = Customer.objects.filter(user=request.user)
+    customer = Customer.objects.filter(user=request.user)
     products = Cart.objects.filter(user=request.user)
     tempamount = 0.0
     totalamount = 0.0
@@ -78,12 +78,26 @@ def checkout(request):
         for i in products:
             tempamount=(i.quantity * i.product.discounted_price)
             totalamount += tempamount
-
-
     totalamount += 70 
+    return render(request, 'app/checkout.html',{'customer':customer,'products':products,'totalamount':totalamount})
+
+def payment_done(request):
+    user = request.user
+    custid = request.GET.get('custid')
+    customerObj = Customer.objects.get(id=custid)
+    cartproducts = Cart.objects.filter(user=user)
+    for i in cartproducts:
+        OrderPlaced(user=user,customer=customerObj,product=i.product,quantity=i.quantity).save()
+
+    return redirect('orders')
 
 
-    return render(request, 'app/checkout.html',{'address':address,'products':products,'totalamount':totalamount})
+
+
+
+
+
+
 
 
 def buy_now(request):
@@ -195,7 +209,10 @@ def address(request):
     return render(request,'app/address.html',{'active':'btn-primary','address':address})
 
 def orders(request):
- return render(request, 'app/orders.html')
+    orders = OrderPlaced.objects.filter(user=request.user)
+    total_product = Cart.objects.filter(user=request.user).count()
+
+    return render(request, 'app/orders.html',{'orders':orders,'total_product':total_product})
 
 # def change_password(request):
 #  return render(request, 'app/changepassword.html')
