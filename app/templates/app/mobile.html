@@ -1,0 +1,43 @@
+{% extends 'app/base.html' %} {% load static %} {% block title %}Buy Now{% endblock title %} {% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-3">
+            Side Bar for Mobile filter
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a href="{% url 'mobile' %}">All Mobile </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'mobile_data' 'samsung' %}">Samsung</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'mobile_data' 'apple' %}">Apple</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'mobile_data' 'redmi' %}">Redmi</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'mobile_data' 'Below' %}">Below 10000</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'mobile_data' 'above' %}">above 10000</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-8 offset-sm-1">
+            <div class="row">
+                {% for t in mobile %}
+                <div class="col-md-4 col-sm-6 ">
+                    <a href="{% url 'product-detail' t.id %}" class="btn">
+                        <div class="item"><img src="{{t.product_image.url}}" alt="" height="200px"><br>
+                            <span class="fw-bold">{{t.title}}</span><br><span class="fs-5">{{t.discounted_price}}</span><br>
+                            <p>{{t.description}}</p>
+                        </div>
+                    </a>
+                </div> {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock main-content %}
