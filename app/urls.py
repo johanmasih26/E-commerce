@@ -48,7 +48,7 @@ urlpatterns = [
     path('mobile/', views.mobile, name='mobile'),
     path('mobile/<slug:data>', views.mobile, name='mobile_data'),
     path('accounts/login/',auth_views.LoginView.as_view(template_name='app/login.html',
-    authentication_form=LoginForm),name='login'),
+    authentication_form=LoginForm),name="login"),
     path('accounts/logout/',auth_views.LogoutView.as_view(next_page='login'),name="logout"),
 
     path('registration/', views.RegisterationView.as_view(), name='customerregistration'),

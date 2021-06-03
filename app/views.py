@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from django.db.models import query
 from django.db.models.query import QuerySet
 from django.http import request
@@ -31,12 +32,15 @@ class ProductDetailView(View):
         return render(request,'app/productdetail.html',{'product':product})
 
 def add_to_cart(request):
-    user = request.user
-    user_id = request.user.id
-    pk = request.GET.get('product_id')
-    product = Product.objects.get(id=pk)
-    Cart(user=user,product=product,userid=user_id).save()
-    return redirect(showCart)
+    if request.user.is_authenticated:
+        user = request.user
+        user_id = request.user.id
+        pk = request.GET.get('product_id')
+        product = Product.objects.get(id=pk)
+        Cart(user=user,product=product,userid=user_id).save()
+        return redirect(showCart)
+    else:   
+        return redirect('login')
 
 def showCart(request):
     amount = 0.0
