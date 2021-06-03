@@ -52,6 +52,10 @@ urlpatterns = [
     path('accounts/logout/',auth_views.LogoutView.as_view(next_page='login'),name="logout"),
 
     path('registration/', views.RegisterationView.as_view(), name='customerregistration'),
-    path('checkout/', views.checkout, name='checkout')
+    path('checkout/', views.checkout, name='checkout'),
+    path('payment_done/', views.payment_done, name='payment_done'),
+
+
+
 ]  + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
