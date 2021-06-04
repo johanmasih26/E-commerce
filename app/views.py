@@ -26,6 +26,7 @@ class ProductView(View):
             topwears = Product.objects.filter(category='TW')
             Bottomwears = Product.objects.filter(category='BW')
             Mobile = Product.objects.filter(category='M')
+            total_product = 0
         
         return render(request,'app/home.html',{'topwears':topwears,'Bottomwears':Bottomwears,'Mobile':Mobile,'total_product':total_product})
         
@@ -54,9 +55,9 @@ def showCart(request):
     amount = 0.0
     shipping_amount = 70.0
     totalamount = 0.0
-    total_product = Cart.objects.filter(user=request.user).count()
-    print(total_product)
+    
     if request.user.is_authenticated:
+        total_product = Cart.objects.filter(user=request.user).count()
         cart = Cart.objects.filter(user=request.user)
         if cart:
             for p in cart:
@@ -66,8 +67,10 @@ def showCart(request):
             return render(request,'app/addtocart.html',{'cart':cart,'totalamount':totalamount,'amount':amount,'total_product':total_product}) 
         else:
             messages.warning(request,'You have no Product in Your Cart !!')
-
-    return render(request,'app/addtocart.html',{'cart':cart,'totalamount':totalamount,'amount':amount})
+    else:
+        messages.warning(request,'You have no Product in Your Cart !! You have Not Logged In !!')
+        total_product = 0
+    return render(request,'app/addtocart.html',{'totalamount':totalamount,'amount':amount,'total_product':total_product})
 
 
 def checkout(request):
