@@ -2,20 +2,22 @@
 <div class="container my-5">
     <div class="row">
         <div class="col-sm-6 text-center align-self-center">
-            <img src="{{product.product_image.url}}" alt="" class="img-fluid img-thumbnail">
+            <img src="{{product.product_image.url}}" alt="" class="img-fluid img-thumbnail" style="height: 400px;">
         </div>
         <div class="col-sm-5 offset-sm-1">
             <h2>Product Title : {{product.title}}</h2>
             <hr>
             <p>{{product.description}}
             </p> <br>
-            <h4>{{product.selling_price}}<small class="fw-light text-decoration-line-through"> {{product.discounted_price}}</small></h4> <br>
-
+            <h4><s>{{product.selling_price}}</s><small class="fw-light text-decoration-line-through">&nbsp;<small>Only</small> {{product.discounted_price}}</small>
+            </h4> <br> {% if product_in_cart %}
+            <a href="/cart" class="btn btn-primary shadow px-5 py-2">Go to cart</a> {% else %}
             <form action="/add-to-cart" class="d-inline">
                 <input type="hidden" name="product_id" value="{{product.id}}">
                 <input type="submit" value="Add to Cart" class="btn btn-primary shadow px-5 py-2">
-            </form>
-            <a href="{% url 'buy-now' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a>
+            </form> {% endif %}
+
+            <a href="{% url 'checkout' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a>
             <h5 class="mt-5">Available Offers</h5>
             <ul>
                 <li>Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit</li>

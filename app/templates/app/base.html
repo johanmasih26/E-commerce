@@ -18,14 +18,23 @@
     <!--Custom CSS-->
     <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
 
-
+    <style>
+        footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            /* Height of the footer */
+            background: #6cf;
+        }
+    </style>
     <title>ShoppingX | {% block title %} {% endblock title %} </title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg  navbar-dark bg-secondary">
-        <div class="container">
-            <a class="navbar-brand" href="/">ShoppingX</a>
+    <nav class="navbar navbar-expand-lg  navbar-dark bg-secondary m-auto fixed-top">
+        <div class="container m-auto">
+            <a class="navbar-brand" href="/">E-commerce</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
        </button>
@@ -97,10 +106,7 @@
     {% block banner_slider %} {% endblock banner_slider %} {% block livesale %} {% endblock livesale %} {% block main-content %} {% endblock main-content %}
 
     <!-- Start Footer -->
-    <footer class="container-fluid bg-dark text-center p-2 mt-5">
-        <small class="text-white">Copyright &copy; 2021 || Designed By GeekyShows || </small>
-        <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px">
-    </footer>
+    {% block footer %} {% endblock footer %}
     <!-- End Footer -->
 
     <!-- Jquery -->
@@ -112,6 +118,10 @@
     <script src="{% static 'app/js/all.min.js' %}"></script>
     <script src="{% static 'app/js/myscript.js' %}"></script>
 </body>
+
+</html>
+
+</html>
 
 </html>
 

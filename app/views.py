@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+from django.contrib.auth.models import User
 from django.db.models import query
 from django.db.models.query import QuerySet
 from django.http import request
@@ -38,7 +39,14 @@ class ProductView(View):
 class ProductDetailView(View):
     def get(self,request,pk):
         product = Product.objects.get(pk=pk)
-        return render(request,'app/productdetail.html',{'product':product})
+        
+        if request.user.is_authenticated:
+         total_product = Cart.objects.filter(user=request.user).count()
+         product_in_cart = False 
+         product_in_cart = Cart.objects.filter(Q(product=product.id) & Q(user=request.user)).exists()
+         return render(request,'app/productdetail.html',{'product':product,'product_in_cart':product_in_cart,'total_product':total_product})
+        else:
+         return render(request,'app/productdetail.html',{'product':product})
 
 def add_to_cart(request):
     if request.user.is_authenticated:
@@ -73,6 +81,7 @@ def showCart(request):
     return render(request,'app/addtocart.html',{'totalamount':totalamount,'amount':amount,'total_product':total_product})
 
 
+@login_required
 def checkout(request):
 
     customer = Customer.objects.filter(user=request.user)
@@ -193,10 +202,15 @@ def removecart(request):
 class ProfileView(View):
     def get(self,request):
         form = CustomerProfileForm()
-        return render(request,'app/profile.html',{'form':form,'active':'btn-primary'})
+        
+        profiledata = User.objects.get(username=request.user)
+        
+        return render(request,'app/profile.html',{'form':form,'active':'btn-primary','profiledata':profiledata})
 
     def post(self,request):
         form = CustomerProfileForm(request.POST)
+        profiledata = User.objects.get(username=request.user)
+        
         if form.is_valid():
             user = request.user
             name = form.cleaned_data['name']
@@ -207,7 +221,7 @@ class ProfileView(View):
             reg = Customer(user=user,name=name,locality=locality,city=city,state=state,zipcode=zipcode)
             reg.save()
             messages.success(request,'New address registered !!')
-        return render(request,'app/profile.html',{'form':form,'active':'btn-primary'})
+        return render(request,'app/profile.html',{'form':form,'active':'btn-primary','profiledata':profiledata})
 
 def address(request):
     address = Customer.objects.filter(user=request.user)

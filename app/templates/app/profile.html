@@ -1,21 +1,41 @@
  {% extends 'app/base.html' %} {% load static %} {% block title %}Profile{% endblock title %} {% block main-content %}
 <div class="container my-5">
-    <div class="row">
-        <div class="col-sm-2 border-end">
-            <h5 class="text-capitalize">Welcome {{user.username}}</h5>
+    <!-- Nav tabs -->
+    <div class="" style="margin-top:90px;">
+        <ul class="nav nav-tabs ">
+            <li class="nav-item">
+                <a class="nav-link {{active}}" data-toggle="tab" href="{% url 'profile'%}">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="{% url 'address' %}">Address</a>
+            </li>
 
-            <ul class="list-unstyled">
-                <li class="d-grid"><a href="{% url 'profile' %}" class="btn {{active}}">Profile</a></li>
-                <li class="d-grid"><a href="{% url 'address' %}" class="btn">Address</a></li>
-            </ul>
+        </ul>
+    </div>
+
+
+
+    <div class="row">
+
+        <div class="col-sm-6 ">
+            <h3 class="p-3 mt-3">Your Profile</h3>
+            <div class="card shadow-sm p-3" style="width:500px">
+
+                <div class="card-body">
+                    <p>Name:{{profiledata.username}}</p>
+                    <p>Email: {{profiledata.email}}</p>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-8 offset-sm-1">
-            <form action="" method="post">
+        <div class="col-sm-6">
+
+            <h3 class="p-3 mt-3">Add Shipping Address</h3>
+            <form action="" method="post" class="shadow-sm p-3">
                 {% csrf_token %}{% for fm in form %}
-                <div class="form-group col-lg-6 mb-3">
-                    {{fm.label_tag}}{{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+                <div class="form-group ">
+                    {{fm.label_tag}}{{fm}} <small class="text-danger ">{{fm.errors|striptags}}</small>
                 </div>{% endfor %}
-                <div class="col-12 mt-3 ">
+                <div class=" ">
                     <button type="submit " class="btn btn-primary ">Submit</button>
                 </div>
             </form>
@@ -23,6 +43,9 @@
             <p class="alert alert-{{message.tags}} mt-3 ">{{message}}</p> {% endfor %} {% endif %}
         </div>
 
+
     </div>
+
+
 </div>
 {% endblock main-content %}
