@@ -223,6 +223,7 @@ class ProfileView(View):
             messages.success(request,'New address registered !!')
         return render(request,'app/profile.html',{'form':form,'active':'btn-primary','profiledata':profiledata})
 
+@login_required
 def address(request):
     address = Customer.objects.filter(user=request.user)
     return render(request,'app/address.html',{'active':'btn-primary','address':address})
