@@ -20,7 +20,7 @@
         <div class="col-6">
             <h4>Select Shipping Address</h4>
             <hr>
-            <form action="/payment_done">
+            <form action="/payment_done" id="addressform">
                 {% for i in customer %}
                 <div class="card">
                     <div class="card-body">
@@ -35,10 +35,51 @@
                     Address: {{forloop.counter}} </label>
                 </div>{% endfor %}
                 <div class="text-end">
-                    <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
+
+                    <div id="paypal-button-container"></div>
+
+
+                    <!-- <div class="paypal-button-container"></div> -->
+                    <!-- <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button> -->
                 </div>
+
+
             </form>
         </div>
 
     </div>
-</div>{% endblock main-content %}
+</div>
+
+
+
+{% endblock main-content %} {% block paypal_script %}
+
+<script src="https://www.paypal.com/sdk/js?client-id=AdFtjPzmS8I1k5YXkmNtoHDobbB8RlP6tYq4PnlhFZJrLExNB1j_Tqf8SWSoA6182Ip_5sXr0E8dfWf0">
+    // Required. Replace YOUR_CLIENT_ID with your sandbox client ID.
+</script>
+
+
+
+<script>
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            // This function sets up the details of the transaction, including the amount and line item details.
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '{{totalamount}}'
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            // This function captures the funds from the transaction.
+            return actions.order.capture().then(function(details) {
+                // This function shows a transaction success message to your buyer.
+                alert('Transaction completed by ' + details.payer.name.given_name);
+                document.getElementById('addressform').submit();
+            });
+        }
+    }).render('#paypal-button-container');
+    //This function displays Smart Payment Buttons on your web page.
+</script>{% endblock paypal_script %}
