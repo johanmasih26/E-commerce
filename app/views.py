@@ -101,9 +101,9 @@ def payment_done(request):
     customerObj = Customer.objects.get(id=custid)
     cartproducts = Cart.objects.filter(user=user)
     for i in cartproducts:
-        OrderPlaced(user=user,customer=customerObj,product=i.product,quantity=i.quantity).save()
-
-    return redirect('orders')
+        orderDetail = OrderPlaced(user=user,customer=customerObj,product=i.product,quantity=i.quantity)
+        orderDetail.save()
+    return render(request,'app/orders.html')
 
 
 

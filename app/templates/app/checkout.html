@@ -33,15 +33,20 @@
                     <input class="form-check-input" type="radio" id="custid{{forloop.counter}}" name="custid" value="{{i.id}}">
                     <label class="form-check-label fw-bold" for="">
                     Address: {{forloop.counter}} </label>
-                </div>{% endfor %}
+                </div>
+                {% endfor %} {% if customer %}
                 <div class="text-end">
 
                     <div id="paypal-button-container"></div>
 
+                </div> {% else %}
+                <div>
+                    <h4>Please add address for Shipping</h4><br>
+                    <p>Go to
+                        <a href="{% url 'profile' %}">Add Address</a>
+                    </p>
+                </div> {% endif %}
 
-                    <!-- <div class="paypal-button-container"></div> -->
-                    <!-- <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button> -->
-                </div>
 
 
             </form>
