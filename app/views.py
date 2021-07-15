@@ -220,7 +220,7 @@ class ProfileView(View):
             zipcode = form.cleaned_data['zipcode']
             reg = Customer(user=user,name=name,locality=locality,city=city,state=state,zipcode=zipcode)
             reg.save()
-            messages.success(request,'New address registered !!')
+            messages.success(request,'New address registered ! Shop and Enjoy ! ')
         return render(request,'app/profile.html',{'form':form,'active':'btn-primary','profiledata':profiledata})
 
 @login_required
