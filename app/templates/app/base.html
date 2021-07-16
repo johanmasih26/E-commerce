@@ -19,106 +19,125 @@
     <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
 
 
-    <style>
-        footer {
-            position: relative;
-            bottom: 0;
-            width: 100%;
-            height: 40px;
-            /* Height of the footer */
-            background: #6cf;
-        }
-    </style>
+
     <title>ShoppingX | {% block title %} {% endblock title %} </title>
     {% block paypal_link %} {% endblock paypal_link %}
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg  navbar-dark bg-secondary m-auto fixed-top">
-        <div class="container m-auto">
-            <a class="navbar-brand" href="/">E-commerce</a>
+
+
+    <nav class="navbar navbar-expand-lg  navbar-dark bg-dark m-auto" style="padding: 20px;">
+        <div class="container">
+            <a href="/" class="navbar-brand bigshop">BigShop</a>
+
+
+
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
        </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="electronicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-               Electronics
-             </a>
-                        <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
-                            <li><a class="dropdown-item" href="{% url 'mobile' %}">Mobile</a></li>
-                            <li><a class="dropdown-item" href="#">Laptop</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="fashionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-               Fashion
-             </a>
-                        <ul class="dropdown-menu" aria-labelledby="fashionDropdown">
-                            <li><a class="dropdown-item" href="#">Top Wear</a></li>
-                            <li><a class="dropdown-item" href="#">Bottom Wear</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-warning" type="submit">Search</button>
+
+
+                <form class="d-flex mr-auto ml-auto">
+
+                    <div class="input-group md-form form-sm form-2 pl-0">
+                        <input class="form-control my-0 py-1" style="width: 350px; border:none;border-radius:0px;height:45px;" type="text" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <span class="input-group-text  lighten-2" id="basic-text1" style="border-radius: 0px;"><i class="fas fa-search text-grey"
+                              aria-hidden="true"></i></span>
+                        </div>
+                    </div>
                 </form>
-                <div>
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        {% if request.user.is_authenticated %}
-                        <li class="nav-item dropdown mx-2">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="text-capitalize">{{user.username}}</span>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                                <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-                                <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
-                                <li><a class="dropdown-item" href="{% url 'changepassword' %}">Change Password</a></li>
-                                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a href="{% url 'showCart' %}" class="nav-link text-white"><span class="badge bg-danger total_product">{{total_product}}</span> Cart </a>
-                        </li>
+                <ul class="navbar-nav mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link  active" aria-current="page" href="/">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  active" aria-current="page" href="/">SignUp</a>
+                    </li>
+                    <li class="nav-item">
+
+                        <a class="nav-link active" aria-current="page" href="/"><i class="fa fa-fw fa-cart-arrow-down"></i> <sup><span class="badge badge-danger">2</span></sup> </a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="text-capitalize">{{user.username}}</span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
+                            <li><a class="dropdown-item" href="{% url 'changepassword' %}">Change Password</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a href="{% url 'showCart' %}" class="nav-link text-white"><span class="badge bg-danger total_product">{{total_product}}</span> Cart </a>
+                    </li>
 
 
-                        {% else %}
-                        <li class="nav-item mx-2">
-                            <a href="{% url 'login' %}" class="nav-link text-white">Login</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a href="{% url 'customerregistration' %}" class="nav-link text-white">Registration</a>
-                        </li>
-                        <li class="nav-item mx-2">
-                            <a href="{% url 'showCart' %}" class="nav-link text-white"><span class="badge bg-danger total_product">{{total_product}}</span> Cart </a>
-                        </li>
-                        {% endif %}
-
-
-                    </ul>
-                </div>
+                    {% else %}
+                    <li class="nav-item mx-2">
+                        <a href="{% url 'login' %}" class="nav-link text-white">Login</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a href="{% url 'customerregistration' %}" class="nav-link text-white">Registration</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a href="{% url 'showCart' %}" class="nav-link text-white"><span class="badge bg-danger total_product">{{total_product}}</span> Cart </a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
+
     </nav>
+    <nav class="second-nav navbar-light">
+        <ul class="d-flex justify-content-center">
+            <li class="active">
+                <a href="">Home</a>
+            </li>
+
+            <li>
+                <a href="">Laptop</a>
+            </li>
+            <li>
+                <a href="">Jewellery</a>
+            </li>
+            <li>
+                <a href="">Mobile</a>
+            </li>
+
+            <li>
+                <a href="">Camera</a>
+            </li>
+            <li>
+                <a href="">Contact</a>
+            </li>
+        </ul>
+
+    </nav>
+
+
+
     {% block banner_slider %} {% endblock banner_slider %} {% block livesale %} {% endblock livesale %} {% block main-content %} {% endblock main-content %} {% block paypal_script %} {% endblock paypal_script %}
 
     <!-- Start Footer -->
     {% block footer %} {% endblock footer %}
     <!-- End Footer -->
-    <script src="{% static 'app/js/bootsrap.min.js' %}"></script>
-    <!-- Jquery -->
-    <script src="{% static 'app/js/jquery.js' %}"></script>
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="{% static 'app/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'app/js/jquery.js' %} "></script>
 
-    <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'app/js/all.min.js' %}"></script>
-    <script src="{% static 'app/js/myscript.js' %}"></script>
+    <script src="{% static 'app/js/bootsrap.min.js' %} "></script>
+    <!-- Jquery -->
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="{% static 'app/js/bootstrap.bundle.min.js' %} "></script>
+
+    <script src="{% static 'app/js/owl.carousel.min.js' %} "></script>
+    <script src="{% static 'app/js/all.min.js' %} "></script>
+    <script src="{% static 'app/js/myscript.js' %} "></script>
 </body>
 
 </html>
