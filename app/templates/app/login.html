@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row my-3">
         <div class="col-sm-6 offset-sm-3">
-            <h3>Login</h3>
+            <h4 class="text-center">BigShop Login</h4>
             <hr>
             <form action="" method="post" novalidate class="shadow p-5">
                 {% csrf_token %} {% for fm in form %}
@@ -17,7 +17,7 @@
 
                 <input type="submit" value="Login" class="btn btn-primary">
                 <br>
-                <div class="text-center text-primary fw-bold"><small>New to ShoppinglyX ? <a href="{% url 'customerregistration' %}"
+                <div class="text-center text-primary fw-bold"><small>New to BigShop ? <a href="{% url 'customerregistration' %}"
        class="text-danger">Create an Account</a> </small></div>
 
                 {% if form.non_field_errors %} {% for error in form.non_field_errors %}
