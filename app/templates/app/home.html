@@ -32,8 +32,8 @@
 <!-- Live Sale Section -->
 <div class="container">
     <div style="height:200px;" class="row bg-danger text-center p-5 text-white border-bottom shadow">
-        <h1>AMAZING SALE NOW !</h1>
-        <span>5% Instant Discount on HDFC credit card</span>
+        <h1>HURRY UP ! AMAZING SALE NOW !</h1>
+        <span>20% Instant Discount on HDFC credit card</span>
         <small class="fw-lighter">Term and Condition Applied (For details visit Bank's official Website)</small>
     </div>
 </div>
@@ -49,7 +49,7 @@
             {% for t in topwears %}
             <a href="{% url 'product-detail' t.id %}" class="btn">
                 <div class="item"><img src="{{t.product_image.url}}" alt="" height="300px">
-                    <span class="fw-bold">{{t.title}}</span><br><span class="fs-5">{{t.selling_price}}</span>
+                    <span class="fw-bold">{{t.title}}</span><br><span class="fs-5">$ {{t.selling_price}}</span>
                     <p>{{t.description}}</p>
                 </div>
             </a> {% endfor %}
@@ -123,6 +123,7 @@
 <!-- End 2nd Product Slider -->
 {% endblock main-content %} {% block footer %}
 <footer class="container-fluid bg-dark text-center p-2 mt-5 ">
-    <small class="text-white">Copyright &copy; 2021 || Designed By JohanMasih || </small>
-    <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px">
+    <div class="row text-white">
+
+    </div>
 </footer>{% endblock footer %}
