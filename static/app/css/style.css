@@ -94,6 +94,21 @@
     font-weight: 300;
 }
 
-.mike {
-    background-color: red;
+.view_detail {
+    border-radius: 0px;
 }
+
+.addtocart {
+    border-radius: 0px;
+}
+
+.selling_price {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.hello {
+    margin-top: 150px;
+}
+
+footer {}
