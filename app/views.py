@@ -1,5 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+from django.core import paginator
 from django.db.models import query
 from django.db.models.query import QuerySet
 from django.http import request
@@ -12,24 +13,48 @@ from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class ProductView(View):    
+        
     def get(self,request):
+        
         if request.user.is_authenticated:
             topwears = Product.objects.filter(category='TW')
             Bottomwears = Product.objects.filter(category='BW')
             Mobile = Product.objects.filter(category='M')
             total_product = Cart.objects.filter(user=request.user).count()
-
+         
+         
         else:
             topwears = Product.objects.filter(category='TW')
             Bottomwears = Product.objects.filter(category='BW')
             Mobile = Product.objects.filter(category='M')
             total_product = 0
-        
-        return render(request,'app/home.html',{'topwears':topwears,'Bottomwears':Bottomwears,'Mobile':Mobile,'total_product':total_product})
+            
+
+         
+
+
+        res = Product.objects.all()
+        p = Paginator(res,6)
+        page_num = request.GET.get('page',1)
+    
+        try:
+          page = p.page(page_num)
+        except EmptyPage:
+          page = p.page(1)
+        except PageNotAnInteger:
+          page = p.page(1)
+        context = {
+            'topwears':topwears,
+            'Bottomwears':Bottomwears,
+            'Mobile':Mobile,
+            'total_product':total_product,
+            'page':page,
+        }
+        return render(request,'app/home.html',context)
         
 
 

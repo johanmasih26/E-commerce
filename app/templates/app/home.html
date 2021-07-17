@@ -39,6 +39,7 @@
 </div>
 
 
+
 <!-- End Banner Slider -->
 {% endblock banner_slider %} {% block livesale %}
 <!-- Live Sale Section -->
@@ -46,22 +47,105 @@
     <div style="height:200px;" class="row bg-danger text-center p-5 text-white border-bottom shadow">
         <h1>HURRY UP ! AMAZING SALE NOW !</h1>
         <span>20% Instant Discount on HDFC credit card</span>
-        <small class="fw-lighter">Term and Condition Applied (For details visit Bank's official Website)</small>
+        <small class="fw-lighter">For Offer and Reward Please visit Bank's fficial Website)</small>
     </div>
 </div>
 <!-- End Live Sale Section -->
 {% endblock livesale %} {% block main-content %}
-<!-- 1st Product Slider -->
+<!-- all product goes here -->
+<div>
+    <p class=" text-center all_product_h1 ">All Products</p>
+</div>
 
-<div class="m-3 text-center">
-    <h1 class="my-5">Latest Brands</h2>
+<div class="container" style="margin-top:100px; margin-bottom:150px;">
+    <div class="row ">
+        <!-- #mobile  -->
+        {% for t in page %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card " style="width:300px;">
+                <img class="card-img-top " src="{{t.product_image.url}} " style="height:200px;padding:10px; " alt="Card image ">
+                <div class="card-body text-center ">
+                    <h4 class="card-title "> {{t.title}}</h4>
+                    <p class="card-text ">{{t.description}}</p>
+                    <div class="d-flex justify-content-around align-items-center ">
+                        <a href="# " class="btn btn-sm btn-outline-danger " style="border-radius:0px;margin-left:1px !important; ">View Product</a>
+                        <a href=" " class="btn btn-sm btn-outline-dark " style="border-radius:0px; ">Add to Cart</a>
+                        <span style="font-weight: 600;font-size:15px; "> ${{t.selling_price}}</span>
+                    </div>
+                </div>
+            </div>
+        </div> {% endfor %}
+    </div>
+
+    <div class="page">
+
+        <ul class="pagination justify-content-center mt-4">
+            {% if page.has_previous %}
+            <li class="page-item">
+                <a href="{% url 'home' %}?page={{page.previous_page_number}}" class="page-link">Previous</a>
+            </li> {% endif %} {% for i in page.paginator.page_range %} {% if page.number == i %}
+            <li class="page-item active">
+                <a href="" class="page-link">{{i}}</a>
+            </li> {% else %}
+            <li class="page-item">
+                <a href="{% url 'home' %}?page={{i}}" class="page-link">{{i}}</a>
+            </li>{% endif %} {% endfor %} {% if page.has_next %}
+            <li class="page-item">
+                <a href="{% url 'home' %}?page={{page.next_page_number}}" class="page-link">Next</a>
+            </li> {% endif %}
+
+        </ul>
+    </div>
+
+
+</div>
+
+<!-- all product goes here -->
+
+
+<section class="fdb-block mt-4">
+
+    <div class="container py-5">
+        <div class="row">
+            <div class=" col-md-6 text-center">
+                <h1 class="mb-4">BigShop</h1>
+                <p class="lead">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <p class="mt-4 mb-5"><a class="btn btn-secondary" href="BigShop">Shop Now</a></p>
+
+                <p>Follow us on</p>
+                <p>
+                    <a href="BigShop" class="mx-2 text-secondary"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                    <a href="BigShop" class="mx-2 text-secondary"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                    <a href="BigShop" class="mx-2 text-secondary"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="BigShop" class="mx-2 text-secondary"><i class="fab fa-pinterest" aria-hidden="true"></i></a>
+                    <a href="BigShop" class="mx-2 text-secondary"><i class="fab fa-google" aria-hidden="true"></i></a>
+                </p>
+            </div>
+
+
+            <div class="col-md-6 text-center">
+                <div class="col-fill-right">
+                    <img src="{% static 'app/images/product/7.jpg' %}" style="height:400px;border-radius:50%;" class="img-rounded">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<div class="m-3 text-center ">
+    <h1 class="my-5 ">Latest Brands</h2>
         <!-- Slider 1 -->
-        <div class="owl-carousel text-center" id="slider1">
+        <div class="owl-carousel text-center " id="slider1 ">
 
             {% for t in topwears %}
-            <a href="{% url 'product-detail' t.id %}" class="btn">
-                <div class="item"><img src="{{t.product_image.url}}" alt="" height="300px">
-                    <span class="fw-bold">{{t.title}}</span><br><span class="fs-5">$ {{t.selling_price}}</span>
+            <a href="{% url 'product-detail' t.id %} " class="btn ">
+                <div class="item "><img src="{{t.product_image.url}} " alt=" " height="300px ">
+                    <span class="fw-bold ">{{t.title}}</span><br><span class="fs-5 ">$ {{t.selling_price}}</span>
                     <p>{{t.description}}</p>
                 </div>
             </a> {% endfor %}
@@ -72,32 +156,32 @@
 
 <!-- Payment Info Section -->
 <div class="container my-5 ">
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <img src="{% static 'app/images/payavail/cc.jpg' %}" alt="" srcset="" class="img-fluid">
+    <div class="row ">
+        <div class="col-sm-3 ">
+            <div class="card mb-3 ">
+                <div class="card-body ">
+                    <img src="{% static 'app/images/payavail/cc.jpg' %} " alt=" " srcset=" " class="img-fluid ">
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <img src="{% static 'app/images/payavail/upi.jpg' %}" alt="" srcset="" class="img-fluid">
+        <div class="col-sm-3 ">
+            <div class="card mb-3 ">
+                <div class="card-body ">
+                    <img src="{% static 'app/images/payavail/upi.jpg' %} " alt=" " srcset=" " class="img-fluid ">
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <img src="{% static 'app/images/payavail/nb.jpg' %}" alt="" srcset="" class="img-fluid">
+        <div class="col-sm-3 ">
+            <div class="card mb-3 ">
+                <div class="card-body ">
+                    <img src="{% static 'app/images/payavail/nb.jpg' %} " alt=" " srcset=" " class="img-fluid ">
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <img src="{% static 'app/images/payavail/bj.jpg' %}" alt="" srcset="" class="img-fluid">
+        <div class="col-sm-3 ">
+            <div class="card mb-3 ">
+                <div class="card-body ">
+                    <img src="{% static 'app/images/payavail/bj.jpg' %} " alt=" " srcset=" " class="img-fluid ">
                 </div>
             </div>
         </div>
@@ -106,27 +190,27 @@
 <!-- End Payment Info Section -->
 <hr>
 <!-- 2nd Product Slider -->
-<div class="mx-3 text-center">
-    <h2 class="text-center">Trending Deals</h2>
+<div class="mx-3 text-center ">
+    <h2 class="text-center ">Trending Deals</h2>
     <!-- Slider 2 -->
-    <div class="owl-carousel text-center" id="slider2">
+    <div class="owl-carousel text-center " id="slider2 ">
         {% for t in Bottomwears %}
-        <a href="{% url 'product-detail' t.id %}" class="btn">
-            <div class="item"><img src="{{t.product_image.url}}" alt="" height="200px">
-                <span class="fw-bold">{{t.title}}</span><br><span class="fs-5">{{t.selling_price}}</span>
+        <a href="{% url 'product-detail' t.id %} " class="btn ">
+            <div class="item "><img src="{{t.product_image.url}} " alt=" " height="200px ">
+                <span class="fw-bold ">{{t.title}}</span><br><span class="fs-5 ">{{t.selling_price}}</span>
                 <p>{{t.description}}</p>
             </div>
         </a> {% endfor %}
     </div>
 </div>
-<div class="mx-3 text-center">
+<div class="mx-3 text-center ">
     <h2>Mobiles Deals</h2>
     <!-- Slider 2 -->
-    <div class="owl-carousel text-center" id="slider2">
+    <div class="owl-carousel text-center " id="slider2 ">
         {% for m in Mobile %}
-        <a href="{% url 'product-detail' m.id %}" class="btn">
-            <div class="item"><img src="{{m.product_image.url}}" alt="" height="200px">
-                <span class="fw-bold">{{m.title}}</span><br><span class="fs-5">{{m.selling_price}}</span>
+        <a href="{% url 'product-detail' m.id %} " class="btn ">
+            <div class="item "><img src="{{m.product_image.url}} " alt=" " height="200px ">
+                <span class="fw-bold ">{{m.title}}</span><br><span class="fs-5 ">{{m.selling_price}}</span>
                 <p>{{m.description}}</p>
             </div>
         </a> {% endfor %}
@@ -135,7 +219,7 @@
 <!-- End 2nd Product Slider -->
 {% endblock main-content %} {% block footer %}
 <footer class="container-fluid bg-dark text-center p-2 mt-5 ">
-    <div class="row text-white">
+    <div class="row text-white ">
 
     </div>
 </footer>{% endblock footer %}
