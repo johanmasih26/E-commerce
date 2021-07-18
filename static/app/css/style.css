@@ -49,7 +49,7 @@
 }
 
 .second-nav ul li {
-    padding: 5px 20px 5px 20px;
+    padding: 5px 10px 5px 10px;
     list-style: none;
 }
 
@@ -111,4 +111,6 @@
     margin-top: 150px;
 }
 
-footer {}
+.card-body img {
+    width: 100% !important;
+}
