@@ -57,7 +57,7 @@
 .second-nav ul li a {
     color: #000;
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 350;
 }
 
 .second-container .navbar-nav {
@@ -106,6 +106,24 @@
 .selling_price {
     font-weight: 600;
     font-size: 15px;
+}
+
+
+/* pagination style goes here */
+
+.page ul li a {
+    color: #000;
+    border-radius: 50%;
+    font-size: 15px;
+}
+
+.page ul li {
+    padding: 5px;
+}
+
+.page-active a {
+    background-color: rgb(214, 41, 41);
+    color: #fff !important;
 }
 
 .hello {

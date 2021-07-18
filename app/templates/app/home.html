@@ -79,19 +79,19 @@
 
     <div class="page">
 
-        <ul class="pagination justify-content-center mt-4 ">
+        <ul class="pagination justify-content-center mt-4 text-dark">
             {% if page.has_previous %}
             <li class="page-item ">
-                <a href="{% url 'home' %}?page={{page.previous_page_number}} " class="page-link ">Previous</a>
+                <a href="{% url 'home' %}?page={{page.previous_page_number}} " class="page-link ">&#x2190;</a>
             </li> {% endif %} {% for i in page.paginator.page_range %} {% if page.number == i %}
-            <li class="page-item active ">
+            <li class="page-item page-active">
                 <a href=" " class="page-link ">{{i}}</a>
             </li> {% else %}
             <li class="page-item ">
                 <a href="{% url 'home' %}?page={{i}} " class="page-link ">{{i}}</a>
             </li>{% endif %} {% endfor %} {% if page.has_next %}
             <li class="page-item ">
-                <a href="{% url 'home' %}?page={{page.next_page_number}} " class="page-link ">Next</a>
+                <a href="{% url 'home' %}?page={{page.next_page_number}} " class="page-link ">&#x2192</a>
             </li> {% endif %}
 
         </ul>
@@ -103,15 +103,15 @@
 <!-- all product goes here -->
 
 
-<section class="fdb-block hello">
+<section class="fdb-block hello ">
 
     <div class="container py-5 ">
         <div class="row ">
             <div class=" col-md-6 text-center ">
-                <h1 class="mb-4 all_product_h1">BigShop Special Offer</h1>
+                <h1 class="mb-4 all_product_h1 ">BigShop Special Offer</h1>
                 <p class="lead ">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                 <p class="mt-4 mb-5 ">40% Off save upto 2000Rs</p>
-                <p class="mt-4 mb-5 "><a class="btn btn-outline-info btn-lg " href="BigShop ">Shop Now</a></p>
+                <p class="mt-4 mb-5 "><a class="btn btn-outline-danger btn-lg " href="BigShop ">Shop Now</a></p>
 
 
 
@@ -135,14 +135,14 @@
 <div class="m-3 text-center ">
     <h1 class="my-5 ">Latest Brands</h2>
         <!-- Slider 1 -->
-        <div class="owl-carousel text-center" id="slider1">
+        <div class="owl-carousel text-center " id="slider1 ">
 
             {% for t in topwears %}
             <a href="{% url 'product-detail' t.id %} " class="btn ">
-                <div class="item " style="line-height: 16px;font-size:18px;"><img src="{{t.product_image.url}} " alt="" height="300px">
-                    <p class="mt-4">{{t.title}}</p>
-                    <p class="" style="font-weight:600;">$ {{t.selling_price}}</p>
-                    <p style="font-size:15px;">{{t.description}}</p>
+                <div class="item " style="line-height: 16px;font-size:18px; "><img src="{{t.product_image.url}} " alt=" " height="300px ">
+                    <p class="mt-4 ">{{t.title}}</p>
+                    <p class="" style="font-weight:600; ">$ {{t.selling_price}}</p>
+                    <p style="font-size:15px; ">{{t.description}}</p>
                 </div>
             </a> {% endfor %}
 
@@ -151,20 +151,20 @@
 <!-- End 1st Product Slider -->
 
 <!-- Payment Info Section -->
-<div class=" container " style="margin-top:120px;">
+<div class=" container " style="margin-top:120px; ">
     <div class="row ">
 
         <div class="col-sm-3 ">
             <div class="card mb-3 ">
                 <div class="card-body ">
-                    <img src="{% static 'app/paytm.jpg' %} " style="height:150px;" class=" img-fluid ">
+                    <img src="{% static 'app/paytm.jpg' %} " style="height:150px; " class=" img-fluid ">
                 </div>
             </div>
         </div>
         <div class="col-sm-3 ">
             <div class="card mb-3 ">
                 <div class="card-body ">
-                    <img src="{% static 'app/images.jpg' %} " style="height:150px;" class="img-fluid ">
+                    <img src="{% static 'app/images.jpg' %} " style="height:150px; " class="img-fluid ">
                 </div>
             </div>
         </div>
@@ -178,7 +178,7 @@
         <div class="col-sm-3 ">
             <div class="card mb-3 ">
                 <div class="card-body ">
-                    <img src="{% static 'app/images1.png' %} " style="height:150px;" class="img-fluid ">
+                    <img src="{% static 'app/images1.png' %} " style="height:150px; " class="img-fluid ">
                 </div>
             </div>
         </div>
@@ -187,17 +187,17 @@
 <!-- End Payment Info Section -->
 {% endblock main-content %} {% block footer %}
 
-<footer class="fdb-block footer-large   text-white mt-4">
-    <div class="container">
-        <div class="row align-items-top text-center text-md-left p-4">
-            <div class="col-12 col-sm-6 col-md-4">
+<footer class="fdb-block footer-large text-white mt-4 ">
+    <div class="container ">
+        <div class="row align-items-top text-center text-md-left p-4 ">
+            <div class="col-12 col-sm-6 col-md-4 ">
                 <h3><strong>Country A</strong></h3>
                 <p>Street Address 52<br>BigShop Office</p>
                 <p>9393 827 312 5002</p>
-                <p><a href="https://www.BigShop.com" class="text-white">Harryjohn026@gmail.com</a></p>
+                <p><a href="https://www.BigShop.com " class="text-white ">Harryjohn026@gmail.com</a></p>
             </div>
 
-            <div class="col-12 col-sm-6 col-md-4 mt-4 mt-sm-0">
+            <div class="col-12 col-sm-6 col-md-4 mt-4 mt-sm-0 ">
 
                 <h3>Connect with Us</h3>
                 <p>Facebook</p>
@@ -206,14 +206,14 @@
 
             </div>
 
-            <div class="col-12 col-md-4 mt-5 mt-md-0 text-md-left">
+            <div class="col-12 col-md-4 mt-5 mt-md-0 text-md-left ">
                 <h3>About Us</h3>
                 <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
             </div>
         </div>
 
-        <div class="row mt-5">
-            <div class="col text-center">
+        <div class="row mt-5 ">
+            <div class="col text-center ">
                 © 2021 BigShop. All Rights Reserved
             </div>
         </div>
