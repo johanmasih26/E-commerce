@@ -29,6 +29,7 @@ SECRET_KEY = '7et8v5@@^%=tda4(_*iali-9uqo=-11i77o6!@dcb=ya&ihh^7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#hellloworld
 
 ALLOWED_HOSTS = []
 
