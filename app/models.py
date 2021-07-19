@@ -46,7 +46,7 @@ class Product(models.Model):
 
 class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    userid = models.PositiveIntegerField(null=False)
+    #userid = models.PositiveIntegerField(null=False)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     
