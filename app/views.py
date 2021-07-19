@@ -79,7 +79,7 @@ def add_to_cart(request):
         user_id = request.user.id
         pk = request.GET.get('product_id')
         product = Product.objects.get(id=pk)
-        Cart(user=user,product=product,userid=user_id).save()
+        Cart(user=user,product=product).save()
         return redirect(showCart)
     else:   
         return redirect('login')
